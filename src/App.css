@@ -168,13 +168,3 @@ select.channel-labelID {
 
 .addChannel:hover { background: #ccc; }
 .addChannel:active { background: #bbb; }
-
-@media screen and (max-width:40rem) {
-  .channel-list { font-size: .8rem; }
-}
-
-@media screen and (max-width:30rem) {
-  .channel-list { grid-template-columns: repeat(auto-fill, minmax(13em, 1fr)); }
-
-  .channelAction-item { font-size: .9em; }
-}

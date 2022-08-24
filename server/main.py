@@ -23,11 +23,9 @@ def deleteChannel():
     data = json.load(file)
     file.close()
 
-    channels = data
-
-    for i, channel in enumerate(channels):
+    for i, channel in enumerate(data):
         if channel['id'] == id:
-            channels.pop(i)
+            data.pop(i)
 
     file = open("channels.json", "w+")
     file.write(json.dumps(data))
@@ -46,12 +44,10 @@ def addChannel():
     data = json.load(file)
     file.close()
 
-    channels = data
-
-    channels.append({ "id": id, "name": name })
+    data.append({ "id": id, "name": name })
     def sortByID(k):
         return k['id']
-    channels.sort(key=sortByID)
+    data.sort(key=sortByID)
 
     file = open("channels.json", "w+")
     file.write(json.dumps(data))

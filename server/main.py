@@ -3,6 +3,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
+from controlSomfy import controlSomfy
 
 app = Flask(__name__)
 CORS(app)
@@ -62,12 +63,15 @@ def setShutters():
     channel = request.json['channel']
     action = request.json['action']
 
-    if channel or action is None:
-        result = "Parameters not set!"
+    if channel is None or action is None:
+        response = jsonify({"errors": ["Parameters not set!"]})
     else:
-        result = "Button pressed! Channel: " + str(channel) + ' Action: ' + action
+        somfyResponse = controlSomfy(channel, action)
+        if not somfyResponse:
+            response = jsonify({"message": "Button pressed! Channel: " + str(channel) + ' Action: ' + action})
+        else:
+            response = jsonify(somfyResponse)
 
-    response = jsonify({"message": result})
     return response
 
 if __name__ == "__main__":
